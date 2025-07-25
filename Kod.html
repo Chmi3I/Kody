@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Moje Umiejętności Programistyczne</title>
+    <title>kod do serwera mc </title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
         .code-container { background: #f4f4f4; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
@@ -10,12 +10,12 @@
     </style>
 </head>
 <body>
-    <h1>Moje Umiejętności Programistyczne</h1>
-    <p>Poniżej znajdują się przykłady mojego kodu w różnych językach programowania związane z serwerami Minecraft.</p>
+    <h1>kod na serwer</h1>
+    <p>Poniżej znajdują sie przyklady mojego kodu na moj serwer mc sorry za malą ilosc komentazy, wiem ze to dobry nawyk ale noe chce mi sie tego robic xd a tak wogole to to jest proba zrobienia strony w kilku kezykach a kody sa w wiekszosci skopiowane z moich starszych skryptow na serwer</p>
 
-    <h2>C++ - Symulator wydajności serwera</h2>
+    <h2>sprawdza wydajnośc serwera - c++</h2>
     <div class="code-container">
-        <pre><code>// Symulator wydajności serwera Minecraft w C++
+        <pre><code>// pokazuje wydajność serwera Minecraft w C++
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;cmath&gt;
@@ -62,9 +62,9 @@ int main() {
 }</code></pre>
     </div>
 
-    <h2>Java - Plugin do Minecraft</h2>
+    <h2>Plugin do Mc bukkit w java</h2>
     <div class="code-container">
-        <pre><code>// Prosty plugin do Minecraft w Java - System powitań
+        <pre><code>// latwy  plugin do Minecraft ktory wita gracza
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -76,12 +76,12 @@ public class WelcomePlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
-        getLogger().info("WelcomePlugin został włączony!");
+        getLogger().info("WelcomePlugin został włączony ty jebana kurwo!");
     }
     
     @Override
     public void onDisable() {
-        getLogger().info("WelcomePlugin został wyłączony!");
+        getLogger().info("WelcomePlugin został wyłączony kurwo nie wylaczaj mojego kodu!");
     }
     
     @EventHandler
@@ -94,17 +94,17 @@ public class WelcomePlugin extends JavaPlugin implements Listener {
         );
         player.sendMessage(welcomeMessage.replace('&', '§'));
         
-        // Dodatkowe powitanie dla operatorów
+        // Dodatkowe powitanie dla zajebistych operatorów
         if (player.isOp()) {
-            player.sendMessage("§cDziękujemy za administrowanie serwerem!");
+            player.sendMessage("§cDziękujemy za administrowanie serwerem kurwo!");
         }
     }
 }</code></pre>
     </div>
 
-    <h2>Python - Skrypt analizy logów</h2>
+    <h2>Python skrypcik analizujacy logi</h2>
     <div class="code-container">
-        <pre><code># Analizator logów serwera Minecraft w Pythonie
+        <pre><code># Analizator logów serwera 
 import re
 from collections import defaultdict
 
@@ -130,18 +130,18 @@ def analyze_logs(log_file):
         print(f"{player}: {count} wejść na serwer")
     
     print("\n=== Błędy serwera ===")
-    for error in errors[:10]:  # Pokazujemy tylko 10 pierwszych błędów
+    for error in errors[:10]:  # Pokazuje tylko 10 pierwszych błędów
         print(f"- {error}")
     
     if not errors:
-        print("Brak błędów w logach!")
+        print("Brak błędów w logach! zajebiscie udalo sie!")
 
 if __name__ == "__main__":
     analyze_logs("server.log")</code></pre>
     </div>
 
     <footer>
-        <p>© 2023 Moje Portfolio Programistyczne</p>
+        <p>© 2023 Moje Portfolio Programistyczne skurwysynu</p>
     </footer>
 </body>
 </html>
