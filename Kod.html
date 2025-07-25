@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moje Umiejętności Programistyczne</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .code-container { background: #f4f4f4; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        h1 { color: #333; }
+        h2 { color: #444; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Moje Umiejętności Programistyczne</h1>
+    <p>Poniżej znajdują się przykłady mojego kodu w różnych językach programowania związane z serwerami Minecraft.</p>
+
+    <h2>C++ - Symulator wydajności serwera</h2>
+    <div class="code-container">
+        <pre><code>// Symulator wydajności serwera Minecraft w C++
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+
+class ServerPerformance {
+public:
+    ServerPerformance(int maxPlayers) : maxPlayers(maxPlayers) {}
+    
+    void simulateTick() {
+        currentPlayers = rand() % maxPlayers + 1;
+        tps = 20.0 - (currentPlayers * 0.01);
+        if (tps &lt; 10) tps = 10 + (rand() % 5) / 10.0;
+        performanceHistory.push_back(tps);
+    }
+    
+    void printReport() {
+        std::cout &lt;&lt; "=== Raport wydajności serwera ===" &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Maksymalna liczba graczy: " &lt;&lt; maxPlayers &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Średnie TPS: " &lt;&lt; calculateAverageTPS() &lt;&lt; std::endl;
+    }
+
+private:
+    double calculateAverageTPS() {
+        double sum = 0;
+        for (double tps : performanceHistory) {
+            sum += tps;
+        }
+        return sum / performanceHistory.size();
+    }
+
+    int maxPlayers;
+    int currentPlayers;
+    double tps;
+    std::vector&lt;double&gt; performanceHistory;
+};
+
+int main() {
+    ServerPerformance server(100);
+    for (int i = 0; i &lt; 100; ++i) {
+        server.simulateTick();
+    }
+    server.printReport();
+    return 0;
+}</code></pre>
+    </div>
+
+    <h2>Java - Plugin do Minecraft</h2>
+    <div class="code-container">
+        <pre><code>// Prosty plugin do Minecraft w Java - System powitań
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.EventHandler;
+import org.bukkit.entity.Player;
+
+public class WelcomePlugin extends JavaPlugin implements Listener {
+    
+    @Override
+    public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+        getLogger().info("WelcomePlugin został włączony!");
+    }
+    
+    @Override
+    public void onDisable() {
+        getLogger().info("WelcomePlugin został wyłączony!");
+    }
+    
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        String welcomeMessage = String.format(
+            "&aWitaj, %s! &7Jesteś %d. graczem na serwerze.",
+            player.getName(),
+            getServer().getOnlinePlayers().size()
+        );
+        player.sendMessage(welcomeMessage.replace('&', '§'));
+        
+        // Dodatkowe powitanie dla operatorów
+        if (player.isOp()) {
+            player.sendMessage("§cDziękujemy za administrowanie serwerem!");
+        }
+    }
+}</code></pre>
+    </div>
+
+    <h2>Python - Skrypt analizy logów</h2>
+    <div class="code-container">
+        <pre><code># Analizator logów serwera Minecraft w Pythonie
+import re
+from collections import defaultdict
+
+def analyze_logs(log_file):
+    player_activity = defaultdict(int)
+    errors = []
+    join_pattern = re.compile(r'\[.+\]: (.+) joined the game')
+    error_pattern = re.compile(r'\[.+\]: \[ERROR\] (.+)')
+
+    with open(log_file, 'r') as f:
+        for line in f:
+            join_match = join_pattern.search(line)
+            if join_match:
+                player = join_match.group(1)
+                player_activity[player] += 1
+            
+            error_match = error_pattern.search(line)
+            if error_match:
+                errors.append(error_match.group(1))
+    
+    print("=== Raport aktywności graczy ===")
+    for player, count in sorted(player_activity.items(), key=lambda x: -x[1]):
+        print(f"{player}: {count} wejść na serwer")
+    
+    print("\n=== Błędy serwera ===")
+    for error in errors[:10]:  # Pokazujemy tylko 10 pierwszych błędów
+        print(f"- {error}")
+    
+    if not errors:
+        print("Brak błędów w logach!")
+
+if __name__ == "__main__":
+    analyze_logs("server.log")</code></pre>
+    </div>
+
+    <footer>
+        <p>© 2023 Moje Portfolio Programistyczne</p>
+    </footer>
+</body>
+</html>
