@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cctype>
+
+class ChatBot {
+public:
+    void greet() {
+        std::cout << "Hi! I'm AssistantAI. Ask me anything!\n";
+    }
+
+    void chat() {
+        std::string input;
+        while (true) {
+            std::cout << "\nYou: ";
+            std::getline(std::cin, input);
+
+            // exit command
+            if (input == "exit" || input == "quit") {
+                std::cout << "AssistantAI: See you later!\n";
+                break;
+            }
+
+            respond(input);
+        }
+    }
+
+private:
+    void respond(std::string question) {
+        std::transform(question.begin(), question.end(), question.begin(), ::tolower);
+
+        if (question.find("how are you") != std::string::npos) {
+            std::cout << "AssistantAI: I'm doing well, thanks for asking!";
+        } else if (question.find("what is photosynthesis") != std::string::npos || question.find("photosynthesis") != std::string::npos) {
+            std::cout << "AssistantAI: It's the process where plants use sunlight to produce energy.";
+        } else if (question.find("who are you") != std::string::npos) {
+            std::cout << "AssistantAI: I'm a simple AI created in C++ by Felix!";
+        } else {
+            std::cout << "AssistantAI: Sorry, I don't understand that yet. Try asking something else!";
+        }
+    }
+};
+
+int main() {
+    ChatBot ai;
+    ai.greet();
+    ai.chat();
+
+    return 0;
+}
