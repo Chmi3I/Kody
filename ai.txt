@@ -1,61 +1,50 @@
-// AsystentAI – (autor: chmiel)
-
 #include <iostream>
 #include <string>
-#include <vector>
 #include <algorithm>
+#include <cctype>
 
-class AsystentAI {
+class ChatBot {
 public:
     void przywitanie() {
-        std::cout << "Cześć! Jestem AsystentemAI. Pomogę Ci z pracą domową.\n";
+        std::cout << "Hej! Jestem AsystentAI. Zadaj mi pytanie, a postaram się odpowiedzieć.\n";
     }
 
-    void dodajZadanie(const std::string& temat, const std::string& tresc) {
-        przypisy.push_back({temat, tresc});
-        std::cout << "Dodano nowe zadanie z tematu: " << temat << "\n";
-    }
+    void czatuj() {
+        std::string wejscie;
+        while (true) {
+            std::cout << "\nTy: ";
+            std::getline(std::cin, wejscie);
 
-    void pokazPrzypisy() {
-        std::cout << "\n=== Lista Przypisów ===\n";
-        for (const auto& p : przypisy) {
-            std::cout << "Temat: " << p.temat << "\nTreść: " << p.tresc << "\n---\n";
-        }
-    }
-
-    void znajdzTemat(const std::string& szukanyTemat) {
-        bool znaleziono = false;
-        std::cout << "\n🔍 Wyniki wyszukiwania dla: " << szukanyTemat << "\n";
-        for (const auto& p : przypisy) {
-            if (p.temat.find(szukanyTemat) != std::string::npos) {
-                std::cout << "Temat: " << p.temat << "\nTreść: " << p.tresc << "\n---\n";
-                znaleziono = true;
+            // zakończ
+            if (wejscie == "wyjdz" || wejscie == "exit") {
+                std::cout << "AsystentAI: Do zobaczenia!\n";
+                break;
             }
+
+            odpowiedz(wejscie);
         }
-        if (!znaleziono)
-            std::cout << "Brak wyników dla podanego tematu.\n";
     }
 
 private:
-    struct Przypis {
-        std::string temat;
-        std::string tresc;
-    };
-    std::vector<Przypis> przypisy;
+    void odpowiedz(std::string pytanie) {
+        std::transform(pytanie.begin(), pytanie.end(), pytanie.begin(), ::tolower);
+
+        if (pytanie.find("jak się masz") != std::string::npos) {
+            std::cout << "AsystentAI: Mam się dobrze, dzięki że pytasz!";
+        } else if (pytanie.find("co to fotosynteza") != std::string::npos || pytanie.find("fotosynteza") != std::string::npos) {
+            std::cout << "AsystentAI: Fotosynteza to proces, w którym rośliny przekształcają światło słoneczne w energię.";
+        } else if (pytanie.find("kim jesteś") != std::string::npos) {
+            std::cout << "AsystentAI: Jestem prostym AI napisanym w C++ przez Felixa!";
+        } else {
+            std::cout << "AsystentAI: Hmm... jeszcze tego nie rozumiem. Zadaj inne pytanie!";
+        }
+    }
 };
 
 int main() {
-    AsystentAI mojAsystent;
-
-    mojAsystent.przywitanie();
-
-    mojAsystent.dodajZadanie("Biologia", "Wyjaśnij proces fotosyntezy u roślin.");
-    mojAsystent.dodajZadanie("Historia", "Opisz skutki II wojny światowej.");
-    mojAsystent.dodajZadanie("Matematyka", "Rozwiąż równanie kwadratowe: x^2 - 5x + 6 = 0");
-
-    mojAsystent.pokazPrzypisy();
-
-    mojAsystent.znajdzTemat("Biologia");
+    ChatBot ai;
+    ai.przywitanie();
+    ai.czatuj();
 
     return 0;
 }
